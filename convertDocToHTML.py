@@ -9,7 +9,6 @@ def ignore_files(dir, files):
  
 def main():
     path = os.getcwd()
-    print(path)
     originalPath = f"{path}/test1"
     destinationPath = f"{path}/test2"
     copyDirectory(originalPath, destinationPath)
@@ -18,7 +17,11 @@ def main():
             currFilePath =(os.path.join(subdir, file))
             fileName = file.split('.')[0]
             if(file):
-                createHtml(currFilePath, path, fileName)
+                inputPath = subdir.replace('test1', 'test2')
+                inputPath = inputPath.replace('.docx','')
+               
+                print(inputPath)
+                createHtml(currFilePath, inputPath, fileName)
 
 def copyDirectory(src, dest):
     if(os.path.exists(dest)):
@@ -26,9 +29,11 @@ def copyDirectory(src, dest):
     shutil.copytree(src, dest, ignore=ignore_files)
 
 def createHtml(textFilePath, path, name):
+    print(path)
+
     if(zipfile.is_zipfile(textFilePath)):
         f = open(textFilePath, 'rb')
-        b = open(f"{path}/test2/{name}.html", 'wb')
+        b = open(f"{path}/{name}.html", 'wb')
         document = mammoth.convert_to_html(f)
         b.write(document.value.encode('utf8'))
         f.close()
