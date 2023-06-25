@@ -6,7 +6,14 @@ import zipfile
 
 def ignore_files(dir, files):
     return [f for f in files if os.path.isfile(os.path.join(dir, f))]
- 
+
+
+# This file when run will take the contents of the test1 directory, which should be a directory or .docx files or .docx files
+# And copy the same file structure and their contents but in HTML. Upload the contents of test 2 to AWS
+
+# Have test1 be the directory with all the .docx files. 
+# Delete contents of test2 each time you run 
+# TODO make it so that test2 deletes its sudirtectories on its own  
 def main():
     path = os.getcwd()
     originalPath = f"{path}/test1"
